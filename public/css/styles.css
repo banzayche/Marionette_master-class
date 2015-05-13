@@ -1,0 +1,216 @@
+html{
+	height: 100%;
+}
+html, body{
+	padding: 0;
+	margin: 0;	
+}
+body{
+	min-width: 520px;
+}
+
+
+.ovf-a{
+	overflow: auto;
+	margin-bottom: 20px;
+}
+.error{
+	color: white;
+	background-color: red;
+	border-radius: 5px;
+	text-align: center;
+	padding:10px 20px;
+	display: none; 
+}
+
+
+
+/*general*/
+#general-template{
+	min-height: 100% !important;
+	position: relative;
+	padding: 0 0 50px 0;
+	background-image: url('../img/bg.jpg');
+	background-position: center;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+#general-template .container{
+	background: rgba(254,254,254,.9);
+  	padding: 20px;
+  	border-radius: 7px; 
+}
+
+
+
+
+/*header*/
+#header{
+	background: rgba(255, 255, 255, 0.71);
+	margin-bottom: 20px;
+}
+#header .container{
+	background: transparent;
+}
+#header .header-book a.h1{
+	transition: color .5s;
+	-webkit-transition: color .5s;
+	-moz-transition: color .5s;
+	-ms-transition: color .5s;
+}
+#header .header-book a.h1:hover{
+	transition: color .5s;
+	-webkit-transition: color .5s;
+	-moz-transition: color .5s;
+	-ms-transition: color .5s;
+	text-decoration: none;
+	color: #4cae4c;
+}
+
+
+
+/*footer*/
+#footer{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	background-color: rgba(224,224,224,.9);
+}
+#footer .container{
+	background: transparent;
+}
+
+
+/*main*/
+#main{
+	margin-bottom: 100px;
+}
+.page-404 p{
+	padding: 20px 0 10px 0;
+}
+
+.detail-book p{
+	padding: 40px 0; 
+}
+
+.no-book-bg{
+/*	background-image: url('../img/no-book-bg.jpg');
+	height: 500px;
+	background-position: center;*/
+	color: white;
+	text-shadow: 1px 1px 5px black;  
+}
+.no-book-bg h2{
+/*	background-color: rgba(235,235,235,.9);*/
+  	padding: 10px 0;
+  	border-radius: 5px;
+}
+.no-book-bg p{
+	  display: block;
+/*	  background-color: rgba(224, 219, 219, 0.82);*/
+	  padding: 20px;
+	  height: 85%;
+	  border-radius: 5px;
+}
+
+button.btn-success{
+	background-color: rgb(85, 194, 11); 
+}
+
+tbody td{
+	  line-height: 30px !important;
+}
+.edit_delit>div{
+	padding: 5px; 
+}
+.edit_delit button{
+	width: 100%;
+}
+.edit_delit .spec-button{
+	width: 100%;
+	margin: 5px 0;
+	background: transparent;
+  	border-color: black;
+  	color: black; 
+}
+.edit_delit .spec-button#edit:hover{
+	border-color: #4cae4c;
+	color: #4cae4c;
+	background: transparent;
+}
+.edit_delit .spec-button#delete:hover{
+	border-color: #d43f3a;
+	color: #d43f3a;
+	background: transparent;
+}
+tbody>tr.book-tr:hover{
+	transition: background-color .5s;
+	background-color: rgba(244,244,244,.8);
+	cursor: pointer;
+}
+thead th{
+	background-color: rgba(82, 82, 82, 0.24);
+  	color: white;
+  	font-size: 20px;
+}
+thead .go-sort:hover{
+	transition: background-color .5s;
+	background: rgb(85, 194, 11);
+	cursor: pointer;
+}
+#control-region{
+	padding: 10px;
+}
+.choice-category{
+	margin: 2px 20px;
+	width: 164px;
+}
+#filter-atributes-container a{
+	cursor: pointer;
+}
+
+/*tile variant*/
+#list-region{
+	overflow: auto;
+	padding: 20px 0; 
+}
+div.item-book-tile{
+	padding: 10px;
+	cursor: pointer;
+}
+div.item-book-tile:hover>div{
+	transition: border-color .5s;
+	border-color: white;
+}
+.item-book-tile span{
+	display: block;
+}
+.item-book-tile>div{
+	padding: 5px;
+  	background-color: rgba(200, 200, 200, 0.45);
+  	border-radius: 5px;
+  	border:1px solid transparent;
+}
+.item-book-tile .text-section{
+	overflow: auto;
+	height: 120px;
+}
+.item-book-tile .spec-button{
+	width: 100%;
+	margin: 5px 0;
+	background: transparent;
+  	border-color: white; 
+}
+.item-book-tile .spec-button#edit:hover{
+	border-color:  #4cae4c;
+	color:  #4cae4c;
+	background: transparent;
+}
+.item-book-tile .spec-button#delete:hover{
+	border-color: #d43f3a;
+	color: #d43f3a;
+	background: transparent;
+}

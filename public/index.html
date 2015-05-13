@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Marionette Book library</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" type="text/css" href="/css/styles.css">
+		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+		<!-- bootstrap -->
+		<script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+		<!-- /bootstrap -->
+	</head>
+	<body id="general-template">
+		<section id="header"></section>
+		<section id="main"  class="container"></section>
+		<section id="footer"></section>
+	</body>
+	<!-- templates -->
+		<!-- single book model -->
+		<script type="text/template" id="book-template">
+			<td><%- title %></td>
+			<td><%- author %></td>
+			<td><%- genre %></td>
+			<td><%- year %></td>
+			<td class="edit_delit">
+				<div class="col-sm-12 col-md-6 col-xs-12">
+					<button class="btn btn-primary spec-button" id="edit">Edit</button>
+				</div>
+				<div class="col-sm-12 col-md-6 col-xs-12">
+					<button class="btn btn-danger spec-button" id="delete">Delete</button>
+				</div>
+			</td>
+		</script>
+		<!-- /single book model -->
+
+		<!-- list of Book models -->
+		<script type="text/template" id="book-list-layout-template">
+			<div id="control-region">
+		    	
+		    </div>
+			<div id="list-region">
+
+			</div>		    
+		</script>
+		<!-- /list of Book models -->
+				
+		<!-- List region -->
+		<script type="text/template" id="list-region-template">
+			<thead>
+		        <tr>
+		            <th class="go-sort">Title</th>
+		            <th class="go-sort">Author</th>
+		            <th class="go-sort">Genre</th>
+		            <th class="go-sort">Year</th>
+		            <th>Edit / Delete</th>
+		        </tr>
+		    </thead>
+		</script>		    
+		<!-- /List region -->
+
+		<!-- control Region view -->
+		<script type="text/template" id="control-list-region-template">
+		    <button class="btn btn-success pull-left" id="createBook">Create new Book</button>
+			<div class="btn-group pull-left choice-category">
+			  	<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+					Filtering books by genre <span class="caret"></span>
+			 	</button>
+			  	<ul class="dropdown-menu" id="filter-atributes-container">
+			    	<li><a class="filter-genre">all</a></li>
+			  	</ul>			  	
+			</div>
+			<button class="btn btn-default glyphicon" id="goVariantList"></button>
+		</script>
+		<!-- /control Regin view -->
+
+		<!-- no-child-view -->
+		<script type="text/template" id="noChildView-template">
+			<td colspan="5" class="no-book-bg">
+				<h2 class="text-center">Sorry, there are no books in this genre!</h2>
+				<p class="h4">Create new information of book, or select another genre.</p>
+			</td>
+		</script>
+		<!-- /no-child-view -->
+		
+		<!-- book detail -->
+		<script type="text/template" id="book-detail-template">
+			<h2 class="text-center"><%-title%></h2>
+			<h4><strong><%-author%></strong></h4>
+			<h5><%-genre%>&nbsp;&nbsp;<%-year%> year</h5>
+			<p><%-description%></p>
+			<botton class="btn btn-danger col-sm-4 col-md-4 col-xs-12 pull-right" id="cancel">Cancel</botton>
+		</script>
+		<!-- /book detail -->
+
+		<!-- edit model -->
+		<script type="text/template" id="edit-book-template">
+			<h3 class="error">You have to write Title, Author, Year and Genre of book.</h3>
+		  	<div class="form-group col-sm-12">
+		    	<label for="title" class="col-sm-2 control-label">Title</label>
+		    	<div class="col-sm-8">
+		      		<input type="text" class="form-control" id="title" value="<%-title%>">
+		    	</div>
+		  	</div>
+		  	<div class="form-group col-sm-12">
+		    	<label for="author" class="col-sm-2 control-label">Author</label>
+		    	<div class="col-sm-8">
+			  		<input type="text" class="form-control" id="author" value="<%-author%>">
+			  	</div>
+			</div>
+			<div class="form-group col-sm-12">
+		    	<label for="year" class="col-sm-2 control-label">Year</label>
+		    	<div class="col-sm-8">
+			  		<input type="text" class="form-control" id="year" value="<%-year%>">
+			  	</div>
+			</div>
+			<div class="form-group col-sm-12">
+		    	<label for="genre" class="col-sm-2 control-label">Genre</label>
+		    	<div class="col-sm-8">
+			  		<input type="text" class="form-control" id="genre" value="<%-genre%>">
+			  	</div>
+			</div>
+			<div class="form-group col-sm-12">
+		    	<label for="description" class="col-sm-2 control-label">Description</label>
+		    	<div class="col-sm-8">
+			  		<textarea class="form-control" rows="6" id="description"><%-description%></textarea>
+			  	</div>
+			</div>
+			<botton class="btn btn-success col-sm-4 col-md-4 col-xs-12 pull-left" id="save">Save</botton>
+			<botton class="btn btn-danger col-sm-4 col-md-4 col-xs-12 pull-right" id="cancel">Cancel</botton>
+		</script>
+		<!-- /edit model -->
+
+		<!-- header -->
+		<script type="text/template" id="header-template">
+			<a href="/home" class="h1"><span class="glyphicon glyphicon-book"></span> GoodBooks</a>			
+		</script>		    
+		<!-- /header -->
+
+		<!-- page 404 -->
+		<script type="text/template" id="page-404-template">
+			<h1 class="text-center">404 error</h1>
+			<h2 class="text-center">Sorry, page does not exist!</h2>
+			<p class="h4">Try another url. Or, go to home-page.</p>
+			<a class="btn btn-danger pull-right" href="/home">Go Home</a>
+		</script>
+		<!-- /page 404 -->
+
+		<!-- footer -->
+		<script type="text/template" id="footer-template">
+			<p class="text-center"><span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;&nbsp;Hi everyone! This app help you remember all interesting books that have you ever read.</p>
+			<p class="text-center">&copy;&nbsp;All rights reserved!</p>
+		</script>
+		<!-- /footer -->
+
+		
+
+
+		<!-- tile-list -->
+		<script type="text/template" id="tile-list">
+
+		</script>
+		<!-- /tile-list -->
+
+		<!-- no-child-view for tile-list -->
+		<script type="text/template" id="tile-empty-collection">
+			<h2 class="text-center">Sorry, there are no books in this genre!</h2>
+			<p class="h4">Create new information of book, or select another genre.</p>
+		</script>
+		<!-- /no-child-view -->
+
+		<!-- single book model tile-list-->
+		<script type="text/template" id="tile-book-template">
+			<div class="ovf-a">
+				<div class="text-section">
+					<span class="h3 text-center"><%- title %></span>
+				</div>
+				<div class="col-sm-12 col-md-6 col-xs-12">
+					<button class="btn btn-primary spec-button" id="edit">Edit</button>
+				</div>
+				<div class="col-sm-12 col-md-6 col-xs-12">
+					<button class="btn btn-danger spec-button" id="delete">Delete</button>
+				</div>				
+			</div>
+		</script>
+		<!-- /single book model -->
+
+
+	<!-- /templates -->
+	
+	<!-- marionette -->	
+	<script type="text/javascript" src="/bower_components/underscore/underscore.js"></script>
+	<script type="text/javascript" src="/bower_components/backbone/backbone.js"></script>
+	<script type="text/javascript" src="/bower_components/backbone.babysitter/lib/backbone.babysitter.js"></script>
+	<script type="text/javascript" src="/bower_components/backbone.wreqr/lib/backbone.wreqr.js"></script>
+	<script type="text/javascript" src="/bower_components/backbone.marionette/lib/core/backbone.marionette.js"></script>
+	<!-- / marionette -->
+
+	<!-- app -->
+	<script type="text/javascript" src="/js/app.js"></script>
+	<script type="text/javascript" src="/js/model_collection/model-collection.js"></script>
+	<script type="text/javascript" src="/js/views/static-views.js"></script>
+	<script type="text/javascript" src="/js/views/list-views.js"></script>
+	<script type="text/javascript" src="/js/views/tile-list.js"></script>
+	<script type="text/javascript" src="/js/router_controller/router-controller.js"></script>
+		
+	<!-- Стартуем приложение -->
+	<script>
+		$(function(){
+			myLibrarryApp.start();
+		});
+	</script>
+	<!-- / app -->
+</html>

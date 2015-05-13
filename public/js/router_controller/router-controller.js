@@ -1,0 +1,2 @@
+/*global Backbone */
+'use strict';

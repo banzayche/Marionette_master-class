@@ -1,0 +1,8 @@
+{
+  "name": "myProject",
+  "version": "1.0.0",
+  "dependencies": {
+    "backbone.marionette": "~2.4.1",
+    "bootstrap": "~3.3.4"
+  }
+}
