@@ -6,6 +6,26 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 		tagName: 'tr',
 		className: 'book-tr',
 		template: '#book-template',
+
+		ui: {
+			editBook: '#edit',
+			deleteBook: '#delete'
+		},
+		events: {
+			'click @ui.editBook' : 'goEdit',
+			'click @ui.deleteBook' : 'goDelete',
+			'dblclick' : 'goDetail'
+		},
+
+		goEdit: function(){
+			Backbone.history.navigate('book/'+this.model.get('id')+'/edit', {trigger: true, replace: true});
+		},
+		goDetail: function(){
+			Backbone.history.navigate('book/'+this.model.get('id')+'/detail', {trigger: true, replace: true});
+		},
+		goDelete: function(){
+			this.model.destroy();
+		}
 	});
 
 	listViews.NoChildView = Backbone.Marionette.ItemView.extend({
@@ -19,6 +39,12 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 		ui:{
 			goVariantListView: '#goVariantList',
 			genreContainer: '#filter-atributes-container',
+			createBook: '#createBook',
+			genreSpan: '.filter-genre'
+		},
+		events: {
+			'click @ui.createBook' : 'goCreateBook',
+			'click @ui.genreSpan' : 'setFilterAttribute',
 		},
 
 		onShow: function(){
@@ -44,6 +70,14 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 				this.ui.goVariantListView.removeClass('glyphicon-th-list');
 				this.ui.goVariantListView.addClass('glyphicon-th');
 			}
+		},
+
+		goCreateBook: function(){
+			Backbone.history.navigate('book/create', {trigger: true, replace: true});
+		},
+		setFilterAttribute: function(){
+			var attrFilter = $(e.target).html();
+			myLibrarryApp.request('filterState').set('filter', attrFilter)
 		},
 	});
 
