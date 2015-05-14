@@ -97,6 +97,18 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 
 		childView: listViews.BookItemView,
 		emptyView: listViews.NoChildView,
+
+		ui: {
+			goSort : '.go-sort'
+		},
+		events: {
+			'click @ui.goSort' : "sortOperation",
+		},
+
+		sortOperation: function(e){
+			var sortAttribute = $(e.target).html().toLowerCase()
+			this.collection.goSort(sortAttribute);
+		}
 	});
 
 	listViews.mainLayoutView = Backbone.Marionette.LayoutView.extend({
