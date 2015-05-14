@@ -1,6 +1,8 @@
 /*global Backbone */
 'use strict';
 
+// module - это специальный обьект, который служит для создания модульной системы приложения Marionette.js
+// в данном случаем модуль содержит конструкторы для model и collection.
 var modelCollection = myLibrarryApp.module('modelCollection', function(modelCollection, MyLibrarryApp, Backbone){
 
 	modelCollection.Book = Backbone.Model.extend({
@@ -13,6 +15,7 @@ var modelCollection = myLibrarryApp.module('modelCollection', function(modelColl
 			'id': undefined
 		},
 
+		// данный метод помогает производить фильтрацию
 		accordance: function(filterVal){
 			if( this.get('genre') === filterVal ){
 				return true;
@@ -29,6 +32,7 @@ var modelCollection = myLibrarryApp.module('modelCollection', function(modelColl
 	modelCollection.CollectionBook = Backbone.Collection.extend({
 		model: modelCollection.Book,
 
+		// методы приведенные ниже предназначены для реализации сортировки collection
 		sortAttribute: 'title',
 		goSort: function( sortAttribute ){
 			this.sortAttribute = sortAttribute;
