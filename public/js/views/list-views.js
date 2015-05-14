@@ -45,6 +45,7 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 		events: {
 			'click @ui.createBook' : 'goCreateBook',
 			'click @ui.genreSpan' : 'setFilterAttribute',
+			'click @ui.goVariantListView' : 'goVariantListView',
 		},
 
 		onShow: function(){
@@ -62,6 +63,14 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 			}
 		},
 
+		goVariantListView: function(){
+			if(MyLibrarryApp.request('filterState').get('list_type') === 'tile'){
+				MyLibrarryApp.request('filterState').set('list_type', 'table');
+			} else{
+				MyLibrarryApp.request('filterState').set('list_type', 'tile');
+			}
+		},
+
 		togleIconVariant: function(){
 			if(MyLibrarryApp.request('filterState').get('list_type') === 'tile'){
 				this.ui.goVariantListView.removeClass('glyphicon-th');
@@ -75,7 +84,7 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 		goCreateBook: function(){
 			Backbone.history.navigate('book/create', {trigger: true, replace: true});
 		},
-		setFilterAttribute: function(){
+		setFilterAttribute: function(e){
 			var attrFilter = $(e.target).html();
 			myLibrarryApp.request('filterState').set('filter', attrFilter)
 		},
@@ -97,23 +106,35 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 			listRegion: '#list-region',
 			controlRegion: '#control-region',
 		},
+		initialize: function(){
+			this.listenTo(MyLibrarryApp.request('filterState'), 'change:list_type', this.choiceVariant, this);
+		},
 
 		onShow: function(){
 			this.choiceVariant();
 		},
 		choiceVariant: function(){
+			if(MyLibrarryApp.request('filterState').get('list_type') === 'tile'){
+				this.tileShow();
+			} else{
+				this.tableShow();
+			}
 			var controlListBooks = new MyLibrarryApp.listViews.ControlForList({
 				collection: this.collection,
 			});
 			this.getRegion('controlRegion').show(controlListBooks);
-
-			this.tableShow();
 		},
 		tableShow: function(){
-			var controlListBooks = new MyLibrarryApp.listViews.BookListView({
+			var tableListBooks = new MyLibrarryApp.listViews.BookListView({
 				collection: this.collection,
 			});
-			this.getRegion('listRegion').show(controlListBooks);
+			this.getRegion('listRegion').show(tableListBooks);
+		},
+		tileShow: function(){
+			var tileListBooks = new MyLibrarryApp.TileListViews.BookListView({
+				collection: this.collection,
+			});
+			this.getRegion('listRegion').show(tileListBooks);
 		}
 	});
 });
