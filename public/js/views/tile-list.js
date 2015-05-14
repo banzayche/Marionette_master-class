@@ -37,5 +37,19 @@ var TileListViews = myLibrarryApp.module('TileListViews', function(TileListViews
 
 		childView: TileListViews.BookItemView,
 		emptyView: TileListViews.NoChildView,
+
+		initialize: function(){
+			this.listenTo(MyLibrarryApp.request('filterState'), 'change:filter', this.render, this);
+		},
+
+		// -----изменение стандартного метода-------
+		addChild: function(childModel){
+			var newFilter = MyLibrarryApp.request('filterState').get('filter');
+			if(childModel.accordance(newFilter)){
+				// стандартный метод прорисовки моделей
+				Backbone.Marionette.CompositeView.prototype.addChild.apply(this, arguments);
+			}
+		},
+		// -----/изменение стандартного метода-------
 	});
 });

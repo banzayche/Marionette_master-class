@@ -98,6 +98,10 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 		childView: listViews.BookItemView,
 		emptyView: listViews.NoChildView,
 
+		initialize: function(){
+			this.listenTo(MyLibrarryApp.request('filterState'), 'change:filter', this.render, this);
+		},
+
 		ui: {
 			goSort : '.go-sort'
 		},
@@ -108,7 +112,18 @@ var listViews = myLibrarryApp.module('listViews', function(listViews, MyLibrarry
 		sortOperation: function(e){
 			var sortAttribute = $(e.target).html().toLowerCase()
 			this.collection.goSort(sortAttribute);
-		}
+		},
+
+		// -----изменение стандартного метода-------
+		addChild: function(childModel){
+			var newFilter = MyLibrarryApp.request('filterState').get('filter');
+			if(childModel.accordance(newFilter)){
+				// стандартный метод прорисовки моделей
+				Backbone.Marionette.CompositeView.prototype.addChild.apply(this, arguments);
+			}
+		},
+		// -----/изменение стандартного метода-------
+
 	});
 
 	listViews.mainLayoutView = Backbone.Marionette.LayoutView.extend({
